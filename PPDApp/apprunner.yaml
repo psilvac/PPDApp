@@ -1,0 +1,26 @@
+version: 1.0
+runtime: python311
+
+build:
+  commands:
+    build:
+      - pip3 install -r requirements.txt
+
+run:
+  runtime-version: 3.11.9
+  pre-run:
+    - chmod +x startup.sh
+  command: sh startup.sh
+  network:
+    port: 8000
+  env:
+    - name: DB_HOST
+      value: "{{resolve:secretsmanager:apprunner_secret:SecretString:DB_HOST}}"
+    - name: DB_PORT
+      value: "{{resolve:secretsmanager:apprunner_secret:SecretString:DB_PORT}}"
+    - name: DB_NAME
+      value: "{{resolve:secretsmanager:apprunner_secret:SecretString:DB_NAME}}"
+    - name: DB_USER
+      value: "{{resolve:secretsmanager:apprunner_secret:SecretString:DB_USER}}"
+    - name: DB_PASSWORD
+      value: "{{resolve:secretsmanager:apprunner_secret:SecretString:DB_PASSWORD}}"

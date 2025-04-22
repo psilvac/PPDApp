@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db import migrations
 
 def crear_roles(apps, schema_editor):
@@ -32,19 +31,13 @@ def eliminar_roles(apps, schema_editor):
     Group = apps.get_model("auth", "Group")
     Group.objects.filter(name__in=["Administrador", "Planificador", "Agente", "Lector"]).delete()
 
-
 class Migration(migrations.Migration):
+
     dependencies = [
-        ("user", "0001_initial"),
+        ('user', '0001_initial'),
+        ('auth', '0012_alter_user_first_name_max_length'),
+        ('sessions', '0001_initial'),
     ]
 
-    if settings.TESTING == True:
-
-        operations = []
-    else:
-        operations = [
-            migrations.RunPython(crear_roles, eliminar_roles),
-        ]
-    #operations = []
-
-
+    operations = [
+    ]
