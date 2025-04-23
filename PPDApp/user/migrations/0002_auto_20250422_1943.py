@@ -40,4 +40,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(crear_roles, eliminar_roles),
     ]
