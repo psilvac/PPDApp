@@ -20,7 +20,7 @@ class UsuarioManager(BaseUserManager):
         Atributos:
             - email (str): Correo electrónico del usuario.
             - password (str): Contraseña del usuario.
-            - extra_fields: Campos con información extra del usuario.
+                - extra_fields: Campos con información extra del usuario.
 
         Retorno:
             usuario object.

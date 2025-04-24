@@ -16,6 +16,9 @@ if not User.objects.filter(email='admin@example.com').exists():
         nombre='Admin',
         apellido='User'
     )
+    print('✔ Superusuario creado')
+else:
+    print('ℹ Superusuario ya existe')
 " | python manage.py shell
 
 
