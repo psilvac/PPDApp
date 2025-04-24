@@ -16,8 +16,8 @@ run:
   env:
     - name: DB_HOST
       value: "{{resolve:secretsmanager:spb:SecretString:DB_HOST}}"
-    - name: DB_PORT
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_PORT}}"
+    #- name: DB_PORT
+    #  value: 5432
     - name: DB_NAME
       value: "{{resolve:secretsmanager:spb:SecretString:DB_NAME}}"
     - name: DB_USER
