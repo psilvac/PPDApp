@@ -14,19 +14,11 @@ run:
   network:
     port: 8000
   env:
-    - name: DB_HOST
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_HOST}}"
-    - name: DB_PORT
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_PORT}}"
-    - name: DB_NAME
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_NAME}}"
-    - name: DB_USER
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_USER}}"
-    - name: DB_PASSWORD
-      value: "{{resolve:secretsmanager:spb:SecretString:DB_PASSWORD}}"
-    - name: DJANGO_SUPERUSER_USERNAME
-      value: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_USERNAME}}"
-    - name: DJANGO_SUPERUSER_EMAIL
-      value: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_EMAIL}}"
-    - name: DJANGO_SUPERUSER_PASSWORD
-      value: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_PASSWORD}}"
+    DB_HOST: "{{resolve:secretsmanager:spb:SecretString:DB_HOST}}"
+    DB_PORT: "{{resolve:secretsmanager:spb:SecretString:DB_PORT}}"
+    DB_NAME: "{{resolve:secretsmanager:spb:SecretString:DB_NAME}}"
+    DB_USER: "{{resolve:secretsmanager:spb:SecretString:DB_USER}}"
+    DB_PASSWORD: "{{resolve:secretsmanager:spb:SecretString:DB_PASSWORD}}"
+    DJANGO_SUPERUSER_USERNAME: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_USERNAME}}"
+    DJANGO_SUPERUSER_EMAIL: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_EMAIL}}"
+    DJANGO_SUPERUSER_PASSWORD: "{{resolve:secretsmanager:sps:SecretString:DJANGO_SUPERUSER_PASSWORD}}"
