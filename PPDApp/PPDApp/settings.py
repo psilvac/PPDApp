@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'PPDApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'basetest',
-        'USER': 'postgres',
-        'PASSWORD':'QHgRDl47fjmQLBhwv3mw',
-        'HOST': "database-1.chu06s6aw1zl.us-east-1.rds.amazonaws.com",
-        'PORT': '5432'
+        'NAME': os.environ.get('DB_NAME', 'nombre_base'),
+        'USER': os.environ.get('DB_USER', 'usuario'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'contraseña'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
