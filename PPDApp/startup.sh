@@ -2,7 +2,7 @@
 # Verificar las dependencias instaladas
 #cd PPDApp
 #pip3 list
-pip3 install -r requirements.txt
+pip3 install -r PPDAp/requirements.txt
 python3 manage.py migrate --noinput
 python3 manage.py showmigrations || echo "❌ Error de conexión a la base de datos"
 python3 manage.py migrate --fake auth
