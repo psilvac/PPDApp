@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404, Http404
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import Usuario
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
+from .serializers import PermisosSerializer
 
 
 import json
@@ -53,9 +54,12 @@ def actualizar_usuario(request, pk):
     except Http404:
         print('No se encontró el usuario')
 
-class UsuarioPermisosView(APIView):
+class UsuarioPermisosView(GenericAPIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = PermisosSerializer
 
     def get(self, request):
         permisos = list(request.user.get_all_permissions())
-        return Response({"permisos": permisos})
+        data = {"permisos": permisos}
+        serializer = self.get_serializer(data)
+        return Response(serializer.data)
