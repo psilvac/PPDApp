@@ -39,7 +39,7 @@ jobs:
           echo "DB_NAME=test_db" >> PPDApp/.env
           echo "DB_USER=postgres" >> PPDApp/.env
           echo "DB_PASSWORD=postgres" >> PPDApp/.env
-          echo "DB_HOST=localhost" >> PPDApp/.env
+          echo "DB_HOST=postgres" >> PPDApp/.env
           echo "DB_PORT=5432" >> PPDApp/.env
       - name : Apply migrate
         working-directory: PPDApp
