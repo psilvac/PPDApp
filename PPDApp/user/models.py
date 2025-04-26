@@ -29,7 +29,12 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('El email es obligatorio')
         email = self.normalize_email(email)
         usuario = self.model(email=email, **extra_fields)
-        usuario.set_password(password)
+
+        if password:  # <<< agregado: validamos si viene contraseña
+            usuario.set_password(password)  # <<< se mantiene
+        else:
+            usuario.set_unusable_password()
+
         usuario.save(using=self._db)
         return usuario
 
@@ -47,6 +52,12 @@ class UsuarioManager(BaseUserManager):
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+
+        # <<< agregado: validar que los superusuarios tengan is_staff e is_superuser correctamente
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('El superusuario debe tener is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('El superusuario debe tener is_superuser=True.')
 
         return self.create_user(email, password, **extra_fields)
 
@@ -93,6 +104,12 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
             ('administrar', 'Puede administra sistema'),
 
         ]
+
+    def save(self, *args, **kwargs):
+        # <<< agregado: encripta la contraseña si no está encriptada
+        if self.pk is None or not self.password.startswith('12345678'):
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.email + " - " + self.nombre + "  " + self.apellido
