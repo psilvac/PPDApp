@@ -85,7 +85,7 @@ class MedidaViewSet(viewsets.ModelViewSet):
     schema = AutoSchema()
     queryset = Medida.objects.all()
     serializer_class = MedidaSerializer
-    permission_classes = [DjangoModelPermissionsWithRead]
+    permission_classes = [IsAuthenticated,DjangoModelPermissionsWithRead,EsMismoOrganismo]
     #authentication_classes = [BasicAuthentication]
 
 class OrganismoViewSet(viewsets.ModelViewSet):
