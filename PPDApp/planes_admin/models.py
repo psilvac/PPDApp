@@ -28,6 +28,11 @@ class Organismo(models.Model):
     descripcion = models.CharField(max_length=200)
     rut = models.CharField(max_length=50)
     direccion = models.CharField(max_length=200)
+# Campos de auditor
+    created_by = models.EmailField(unique=True)
+    updated_by = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nombre
@@ -47,7 +52,11 @@ class Plan (models.Model):
     nombre = models.CharField(max_length=200)
     anio = models.IntegerField()
     resolucion = models.CharField(max_length=50, help_text="Resolucion oficial del PPDA")
-
+    # Campos de auditor
+    created_by = models.EmailField(unique=True)
+    updated_by = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def calcular_porcentaje_avance(self):
         """
         Calcula el porcentaje de avance del plan basado en los reportes de las medidas asociadas.
@@ -81,7 +90,11 @@ class Medida(models.Model):
     frecuencia = models.CharField(max_length=50, choices=FRECUENCIA_CHOICES)
     medio_verificacion = models.CharField(max_length=200)
     tipo = models.CharField(max_length=50, choices=TIPO_CHOICES)
-    #plan = models.ManyToManyField(Plan, on_delete=models.CASCADE, help_text='Plan')
+    # Campos de auditor
+    created_by = models.EmailField(unique=True)
+    updated_by = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nombre
@@ -98,6 +111,11 @@ class Comuna(models.Model):
     nombre = models.CharField(max_length=200)
     region = models.CharField(max_length=200)
     provincia = models.CharField(max_length=200)
+    # Campos de auditor
+    created_by = models.EmailField(unique=True)
+    updated_by = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nombre
@@ -115,6 +133,11 @@ class PlanMedida(models.Model):
     periodo = models.IntegerField(validators=[MinValueValidator(2020)], help_text="Año de ejecución de la medida", null=True, blank=True)
     organismo = models.ForeignKey(Organismo, on_delete=models.CASCADE,
                                   help_text='Organismo sectorial responsable de reportar la medida')
+    # Campos de auditor
+    created_by = models.EmailField(unique=True)
+    updated_by = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.plan.nombre + " - " + self.medida.nombre

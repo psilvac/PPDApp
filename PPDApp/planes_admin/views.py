@@ -49,6 +49,11 @@ class ComunaViewSet(viewsets.ModelViewSet):
     serializer_class = ComunaSerializer
     permission_classes = [DjangoModelPermissionsWithRead]
     # authentication_classes = [BasicAuthentication]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 
 
@@ -70,6 +75,11 @@ class PlanViewSet(viewsets.ModelViewSet):
     def get(self, request):
         permisos_requeridos = [perm.__class__.__name__ for perm in self.permission_classes]
         return Response({"permisos_requeridos": permisos_requeridos})
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 
 class MedidaViewSet(viewsets.ModelViewSet):
@@ -87,6 +97,11 @@ class MedidaViewSet(viewsets.ModelViewSet):
     serializer_class = MedidaSerializer
     permission_classes = [DjangoModelPermissionsWithRead]
     #authentication_classes = [BasicAuthentication]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 class OrganismoViewSet(viewsets.ModelViewSet):
     """
@@ -103,6 +118,11 @@ class OrganismoViewSet(viewsets.ModelViewSet):
     serializer_class = OrganismoSerializer
     permission_classes = [IsAuthenticated]
     #authentication_classes = [BasicAuthentication]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 class PlanMedidaViewSet(viewsets.ModelViewSet):
     """
@@ -114,6 +134,11 @@ class PlanMedidaViewSet(viewsets.ModelViewSet):
     serializer_class = PlanMedidaSerializer
     permission_classes = [IsAuthenticated]
     #authentication_classes = [BasicAuthentication]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 class ReporteMedidaViewSet(viewsets.ModelViewSet):
     """
@@ -130,6 +155,11 @@ class ReporteMedidaViewSet(viewsets.ModelViewSet):
     serializer_class = ReporteMedidaSerializer
     permission_classes = [IsAuthenticated, EsMismoOrganismo]
     #authentication_classes = [BasicAuthentication]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 class ReporteMedidaCreateOnlyViewSet(viewsets.ModelViewSet):
     """
@@ -144,6 +174,11 @@ class ReporteMedidaCreateOnlyViewSet(viewsets.ModelViewSet):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     http_method_names = ['post']  # Solo permite POST
     permission_classes = [IsAuthenticated, EsMismoOrganismo]
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user, updated_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
