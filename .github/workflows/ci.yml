@@ -42,7 +42,7 @@ jobs:
           echo "DB_HOST=localhost" >> PPDApp/.env
           echo "DB_PORT=5432" >> PPDApp/.env
       - name: Run tests
-        working directory: PPDApp
+        working-directory: PPDApp
         env:
           DJANGO_SETTINGS_MODULE: PPDApp.settings_test
         run: |
