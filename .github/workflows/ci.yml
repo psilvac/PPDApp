@@ -36,7 +36,7 @@ jobs:
           pip install -r requirements.txt
       - name: Crear archivo .env
         run: |
-          echo "DB_NAME=E3_PROYECTO" >> PPDApp/.env
+          echo "DB_NAME=test_db" >> PPDApp/.env
           echo "DB_USER=postgres" >> PPDApp/.env
           echo "DB_PASSWORD=postgres" >> PPDApp/.env
           echo "DB_HOST=localhost" >> PPDApp/.env
