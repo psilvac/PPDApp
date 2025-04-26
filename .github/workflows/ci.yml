@@ -41,10 +41,19 @@ jobs:
           echo "DB_PASSWORD=postgres" >> PPDApp/.env
           echo "DB_HOST=localhost" >> PPDApp/.env
           echo "DB_PORT=5432" >> PPDApp/.env
-      - name: Run tests
+      - name : Apply migrate
         working-directory: PPDApp
-        env:
-          DJANGO_SETTINGS_MODULE: PPDApp.settings_test
-        run: |
+        run : |
           python manage.py migrate
-          pytest --disable-warnings -q
+      - name : Run tests
+        working-directory: PPDApp
+        run : |
+          python manage.py test
+
+      #- name: Run tests
+
+        #env:
+        #  DJANGO_SETTINGS_MODULE: PPDApp.settings_test
+      #  run: |
+      #    python manage.py migrate
+      #    pytest --disable-warnings -q
