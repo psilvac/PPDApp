@@ -35,6 +35,7 @@ jobs:
           cd PPDApp
           pip install -r requirements.txt
       - name: Crear archivo .env
+        working-directory: PPDApp/PPDApp
         run: |
           echo "DB_NAME=test_db" >> PPDApp/.env
           echo "DB_USER=postgres" >> PPDApp/.env
