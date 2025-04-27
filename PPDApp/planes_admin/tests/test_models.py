@@ -4,8 +4,7 @@ import pytest
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.conf import settings
-
-from planes_admin.models import *
+from planes_admin.models import Plan
 
 
 @pytest.mark.django_db
