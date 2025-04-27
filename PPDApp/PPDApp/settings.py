@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import sys
 from pathlib import Path
-from decouple import config
+from dotenv import load_dotenv
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -154,6 +154,12 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
     'DEFAULT_PERMISSION_CLASSES': [
         'planes_admin.permissions.DjangoModelPermissionsWithRead'
     ],
