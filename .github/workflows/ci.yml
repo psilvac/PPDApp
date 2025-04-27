@@ -66,4 +66,4 @@ jobs:
       - name: Ejecutar tests
         run: |
           cd PPDApp
-          pytest planes_admin/tests/test_models.py
+          pytest planes_admin/tests/test_psc.py
