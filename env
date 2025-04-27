@@ -1,0 +1,5 @@
+DB_NAME=[Nombre BD creada]
+DB_USER=[Usuario, postgres]
+DB_PASSWORD=[password usuario postgres]
+DB_HOST=[IP base de datos postgres, puede sel localhost]
+DB_PORT=[puerto base de datos postgres, usualmente 5432]
