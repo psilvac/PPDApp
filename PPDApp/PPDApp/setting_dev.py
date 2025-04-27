@@ -28,9 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*",]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.awsapprunner.com"
-]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,12 +81,12 @@ WSGI_APPLICATION = 'PPDApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Usualmente en AWS usarás PostgreSQL
-        'NAME': os.environ.get('DB_NAME'),           # El nombre de tu base de datos
-        'USER': os.environ.get('DB_USER'),           # El usuario
-        'PASSWORD': os.environ.get('DB_PASSWORD'),   # La contraseña
-        'HOST': os.environ.get('DB_HOST'),           # El host de la base de datos
-        'PORT': os.environ.get('DB_PORT', '5432'),   # El puerto, 5432 por defecto
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
