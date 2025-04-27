@@ -15,7 +15,6 @@ pluggy==1.5.0
 psycopg2-binary==2.9.10
 PyJWT==2.9.0
 pytest==8.3.5
-python-decouple==3.8
 python-dotenv==1.1.0
 PyYAML==6.0.2
 referencing==0.36.2
