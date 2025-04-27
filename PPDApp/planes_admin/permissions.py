@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission, DjangoModelPermissions
-
+from planes_admin.models import PlanMedida
 class DjangoModelPermissionsWithRead(DjangoModelPermissions):
     perms_map = {
         # sobreescribe el perms_map de DjangoModelPermissions
@@ -15,34 +15,16 @@ class DjangoModelPermissionsWithRead(DjangoModelPermissions):
 
 class EsMismoOrganismo(BasePermission):
     """
-    Permite la edición solo si el usuario pertenece al mismo organismo que el objeto PlanMedida.
+    Permite la acción solo si el usuario pertenece al mismo organismo que el objeto.
     """
 
     def has_permission(self, request, view):
-        # Verificar si el usuario está autenticado
-        if not request.user.is_authenticated:
-            return False
-        # Permitir lectura a todos
+        # Permitir solo a usuarios autenticados
+        return request.user.is_authenticated
 
-        if request.method in ['GET', 'HEAD', 'OPTIONS']:
-            return True
+    #def has_object_permission(self, request, view, obj):
+    #    # Controlar acceso en lectura y escritura en función del organismo
+    #    return request.user.organismo == obj.organismo
 
-        planmedida_id = request.data.get("medida")
-        if not planmedida_id:
-            return False  # No se puede insertar sin referencia a PlanMedida
-
-        from planes_admin.models import PlanMedida
-
-        try:
-            plan_medida = PlanMedida.objects.get(id=planmedida_id)
-        except PlanMedida.DoesNotExist:
-            return False
-
-        # Comparar el organismo del usuario con el del PlanMedida
-        return request.user.organismo == plan_medida.organismo
-
-
-
-
-
-
+    def has_object_permission(self, request, view, obj):
+        return PlanMedida.objects.filter(medida=obj, organismo=request.user.organismo).exists()

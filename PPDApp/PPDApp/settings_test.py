@@ -14,9 +14,3 @@ DATABASES = {
 TESTING = True
 # Desactivar contraseñas complejas en pruebas
 #AUTH_PASSWORD_VALIDATORS = []
-
-# Configuraciones adicionales para optimizar las pruebas
-#DEBUG = False
-#SECRET_KEY = "test_secret_key"
-#EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"  # Usa un backend de correo en memoria
-#PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]  # Acelera el hashing de contraseñas en pruebas

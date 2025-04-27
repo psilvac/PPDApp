@@ -1,0 +1,69 @@
+name: Django Test CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:  # Variables disponibles para Django en settings_test.py
+      DB_NAME: test_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Cambia la versión si usas otra
+
+      - name: Instalar dependencias
+        run: |
+          cd PPDApp
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-django
+
+      - name: Esperar que Postgres esté listo
+        run: |
+          cd PPDApp
+          echo "Esperando 15 segundos a que Postgres esté saludable..."
+          sleep 15
+
+      - name: Migrar base de datos
+        run: |
+          cd PPDApp
+          python manage.py migrate --noinput || true
+          python manage.py migrate --fake auth
+          python manage.py migrate
+
+      - name: Ejecutar tests
+        run: |
+          cd PPDApp
+          pytest planes_admin/tests/test_psc.py
