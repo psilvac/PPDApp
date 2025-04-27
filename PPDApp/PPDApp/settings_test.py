@@ -1,6 +1,13 @@
 from .settings import *
 import os
 
+ALLOWED_HOSTS = ["*",]
+
+CSRF_TRUSTED_ORIGINS = [
+    "*",
+]
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
