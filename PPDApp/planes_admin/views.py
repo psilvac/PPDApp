@@ -6,6 +6,7 @@ from rest_framework.permissions import DjangoModelPermissions
 from .permissions import DjangoModelPermissionsWithRead, EsMismoOrganismo
 from drf_spectacular.utils import extend_schema
 
+
 from .models import *
 from .forms import *
 from django.http import JsonResponse, Http404
@@ -85,8 +86,12 @@ class MedidaViewSet(viewsets.ModelViewSet):
     schema = AutoSchema()
     queryset = Medida.objects.all()
     serializer_class = MedidaSerializer
-    permission_classes = [IsAuthenticated,DjangoModelPermissionsWithRead,EsMismoOrganismo]
+    permission_classes = [IsAuthenticated,EsMismoOrganismo,DjangoModelPermissionsWithRead]
     #authentication_classes = [BasicAuthentication]
+
+    def get_queryset(self):
+        return Medida.objects.filter(planmedida__organismo=self.request.user.organismo).distinct()
+
 
 class OrganismoViewSet(viewsets.ModelViewSet):
     """
