@@ -90,7 +90,6 @@ DATABASES = {
     }
 }
 
-
 # settings.py
 AUTH_USER_MODEL = 'user.Usuario'
 LOGIN_URL = '/login/'
