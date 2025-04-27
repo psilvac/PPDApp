@@ -45,6 +45,7 @@ jobs:
         working-directory: PPDApp
         run : |
           python manage.py migrate
+        continue-on-error: true
       - name: Handle failure
         if: ${{ failure() }}
         working-directory: PPDApp
