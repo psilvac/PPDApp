@@ -6,7 +6,6 @@ DATABASES = {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": ":memory:",  # Usa una base de datos en memoria (rápida)
         }
-
 }
 TESTING = True
 # Desactivar contraseñas complejas en tests
