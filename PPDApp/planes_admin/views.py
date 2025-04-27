@@ -72,7 +72,7 @@ class PlanViewSet(viewsets.ModelViewSet):
     serializer_class = PlanSerializer
     permission_classes = [DjangoModelPermissionsWithRead]
     #authentication_classes = [BasicAuthentication]
-    def get(self, request):
+    def put(self, request):
         permisos_requeridos = [perm.__class__.__name__ for perm in self.permission_classes]
         return Response({"permisos_requeridos": permisos_requeridos})
     def perform_create(self, serializer):

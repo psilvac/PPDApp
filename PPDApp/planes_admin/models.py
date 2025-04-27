@@ -29,8 +29,8 @@ class Organismo(models.Model):
     rut = models.CharField(max_length=50)
     direccion = models.CharField(max_length=200)
 # Campos de auditor
-    created_by = models.EmailField(unique=True)
-    updated_by = models.EmailField(unique=True)
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -53,8 +53,8 @@ class Plan (models.Model):
     anio = models.IntegerField()
     resolucion = models.CharField(max_length=50, help_text="Resolucion oficial del PPDA")
     # Campos de auditor
-    created_by = models.EmailField(unique=True)
-    updated_by = models.EmailField(unique=True)
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def calcular_porcentaje_avance(self):
@@ -91,8 +91,8 @@ class Medida(models.Model):
     medio_verificacion = models.CharField(max_length=200)
     tipo = models.CharField(max_length=50, choices=TIPO_CHOICES)
     # Campos de auditor
-    created_by = models.EmailField(unique=True)
-    updated_by = models.EmailField(unique=True)
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -112,8 +112,8 @@ class Comuna(models.Model):
     region = models.CharField(max_length=200)
     provincia = models.CharField(max_length=200)
     # Campos de auditor
-    created_by = models.EmailField(unique=True)
-    updated_by = models.EmailField(unique=True)
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -134,8 +134,8 @@ class PlanMedida(models.Model):
     organismo = models.ForeignKey(Organismo, on_delete=models.CASCADE,
                                   help_text='Organismo sectorial responsable de reportar la medida')
     # Campos de auditor
-    created_by = models.EmailField(unique=True)
-    updated_by = models.EmailField(unique=True)
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

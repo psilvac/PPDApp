@@ -1,6 +1,6 @@
 from datetime import date
 
-import pytest
+import pytest, json
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
@@ -31,7 +31,7 @@ PASSWORD="12345678"
 USERNAME="plan@ppda.cl"
 
 @pytest.fixture
-def crear_roles():
+def crear_roles(db):
     roles = {
         "Administrador": ["add_comuna", "change_comuna", "delete_comuna", "view_comuna",
                           "add_organismo", "change_organismo", "delete_organismo", "view_organismo",
@@ -50,18 +50,21 @@ def crear_roles():
     for nombre_grupo, lista_permisos in roles.items():
         grupo, creado = Group.objects.get_or_create(name=nombre_grupo)
 
-        # Agregar permisos al grupo
-        if True:
-            for codename in lista_permisos:
-                permiso = Permission.objects.filter(codename=codename).first()
-                if permiso:
-                    grupo.permissions.add(permiso)
+        for codename in lista_permisos:
+            permiso = Permission.objects.filter(codename=codename).first()
+            if permiso:
+                grupo.permissions.add(permiso)
 
-            grupo.save()
+        grupo.save()
+    return Group.objects.all()
 
 @pytest.fixture
-def crear_usuario_admin(db):
+def crear_usuario_admin(db, crear_roles):
     usuario = Usuario.objects.create_user(email="admin@ppda.cl", password=PASSWORD)
+    usuario.set_password(PASSWORD)
+    usuario.save()
+    assert usuario.email == "admin@ppda.cl"
+    assert usuario.check_password(PASSWORD)
     grupo, creado = Group.objects.get_or_create(name="Administrador")
 
     usuario.groups.add(grupo)
@@ -69,9 +72,10 @@ def crear_usuario_admin(db):
     return usuario
 
 @pytest.fixture
-def jwt_token_admin(crear_usuario_admin, crear_roles):
+def jwt_token_admin(db, crear_usuario_admin):
     client = APIClient()
     response = client.post("/api/token/", {"email": "admin@ppda.cl", "password": PASSWORD})
+    print(f"Acceso: {response.data}")
     return response.data["access"]
 
 @pytest.fixture
@@ -81,18 +85,29 @@ def api_client_admin(jwt_token_admin):
     return client
 
 @pytest.fixture
-def crear_usuario_planificador(db):
+def crear_usuario_planificador(db, crear_roles):
     usuario = Usuario.objects.create_user(email=USERNAME, password=PASSWORD)
+    usuario.set_password(PASSWORD)
+    usuario.save()
+    assert usuario.email == USERNAME
+    assert usuario.check_password(PASSWORD)
+
     grupo, creado = Group.objects.get_or_create(name="Planificador")
+    print(f"Permisos del grupo {grupo.name}: {[permiso.codename for permiso in grupo.permissions.all()]}")
 
     usuario.groups.add(grupo)
     usuario.save()
+
+    print(f"Grupos del usuario {usuario.email}: {[grupo.name for grupo in usuario.groups.all()]}")
+
     return usuario
 
 @pytest.fixture
-def jwt_token_planificador(crear_usuario_planificador, crear_roles):
+def jwt_token_planificador(db, crear_usuario_planificador):
     client = APIClient()
     response = client.post("/api/token/", {"email": USERNAME, "password": PASSWORD})
+    print(f"Acceso: {response.data}")
+
     return response.data["access"]
 
 @pytest.fixture
@@ -122,6 +137,7 @@ class TestPlanViewSet:
     def test_create_plan(self, api_client_planificador, plan_data):
         url = reverse("plan-list")
         response = api_client_planificador.post(url, plan_data, format="json")
+        print("🔹 Permisos requeridos por la API:", response)
         assert response.status_code == status.HTTP_201_CREATED
         assert Plan.objects.count() == 1
 
@@ -136,10 +152,11 @@ class TestPlanViewSet:
         plan = Plan.objects.create(**plan_data)
         url = reverse("plan-detail", args=[plan.id])
         updated_data = plan_data.copy()
-        updated_data["nombre"] = "Gabriel José"
+        updated_data["nombre"] = "Gabriel Jose"
         response = api_client_planificador.put(url, updated_data, format="json")
+        print("🔹 Permisos requeridos por la API:", response)
         assert response.status_code == status.HTTP_200_OK
-        assert response.data["nombre"] == "Gabriel José"
+        assert response.data["nombre"] == "Gabriel Jose"
 
     def test_delete_plan(self, api_client_planificador, plan_data):
         plan = Plan.objects.create(**plan_data)

@@ -16,11 +16,14 @@ class TestPlanSerializer:
             "nombre": "Gabriel",
             "anio": 2025,
             "resolucion": "1927-03-06",
+            "created_by":"user@mail.cl",
+            "updated_by": "user@mail.cl",
         }
 
     def test_serializar_plan(self, plan_data):
         serializer = PlanSerializer(data=plan_data)
-        assert serializer.is_valid()
+        assert serializer.is_valid(), serializer.errors
+        print(f"Validaciones {serializer.errors}")
         plan = serializer.save()
         assert plan.nombre == plan_data["nombre"]
         assert plan.anio == plan_data["anio"]
