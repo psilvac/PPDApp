@@ -159,7 +159,6 @@ class ReporteMedidaCreateOnlyViewSet(viewsets.ModelViewSet):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 @extend_schema(
     summary="Página de inicio",
     description="Página inicial que no devuelve datos en formato JSON, solo un renderizado.",
