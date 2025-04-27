@@ -45,6 +45,11 @@ jobs:
         working-directory: PPDApp
         run : |
           python manage.py migrate
+      - name: Handle failure
+        if: ${{ failure() }}
+        run: |
+          python manage.py migrate --fake auth
+          python manage.py migrate
       - name : Run tests
         working-directory: PPDApp
         run : |
