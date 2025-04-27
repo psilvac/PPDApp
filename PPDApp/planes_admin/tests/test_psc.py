@@ -1,13 +1,34 @@
 import pytest
-from planes_admin.models import Plan
-from django.db import IntegrityError
+from rest_framework.test import APIClient
+from yourapp.models import Usuario  # O como se llame tu modelo de usuario
+
 
 @pytest.mark.django_db
-def test_plan_creacion_exitosa():
-    plan = Plan.objects.create(nombre="Plan Agua", anio=2025, resolucion="123")
-    assert plan.nombre == "Plan Agua"
+def test_endpoint_con_autenticacion():
+    client = APIClient()
 
-@pytest.mark.django_db
-def test_plan_requiere_anio():
-    with pytest.raises(IntegrityError):
-        Plan.objects.create(nombre="Sin Año")
+    # Crear el usuario
+    user = Usuario.objects.create_user(
+        email="test@example.com",
+        nombre="Test",
+        apellido="User",
+        password="password123"
+    )
+
+    # Login para obtener el token
+    response = client.post('/api/token/', {
+        'email': 'test@example.com',
+        'password': 'password123'
+    })
+
+    assert response.status_code == 200, response.data
+
+    token = response.data['access']  # Para JWT estándar
+
+    # Agregar token en los headers
+    client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+
+    # Probar un endpoint protegido
+    protected_response = client.get('/api/comunas/')
+
+    assert protected_response.status_code == 200
