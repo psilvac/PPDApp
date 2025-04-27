@@ -55,6 +55,8 @@ jobs:
           python manage.py migrate
       - name : Run tests
         working-directory: PPDApp
+        env:
+          DJANGO_SETTINGS_MODULE: PPDApp.settings
         run : |
           pytest
 
