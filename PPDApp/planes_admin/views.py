@@ -92,7 +92,6 @@ class MedidaViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Medida.objects.filter(planmedida__organismo=self.request.user.organismo).distinct()
 
-
 class OrganismoViewSet(viewsets.ModelViewSet):
     """
     API para gestionar los Organismos Sectoriales.
