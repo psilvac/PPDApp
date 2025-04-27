@@ -23,14 +23,17 @@ jobs:
 
       - name: Instalar dependencias
         run: |
+          cd PPDApp
           python -m pip install --upgrade pip
-          pip install -r PPDApp/requirements.txt
+          pip install -r requirements.txt
           pip install pytest pytest-django
 
       - name: Migrar Base de Datos
         run: |
+          cd PPDApp
           python manage.py migrate
 
       - name: Ejecutar tests
         run: |
-          pytest PPDApp/planes_admin/tests/test_models.py
+          cd PPDApp
+          pytest planes_admin/tests/test_models.py
