@@ -4,8 +4,8 @@ from django.db import IntegrityError
 import pytest
 from rest_framework.exceptions import ValidationError
 
-from planes_admin.models import *
-from planes_admin.serializers import *
+from planes_admin.models import Organismo, Plan, Medida, Comuna, PlanMedida, PlanComuna, ReporteMedida
+from planes_admin.serializers import ComunaSerializer, PlanSerializer, MedidaSerializer, OrganismoSerializer, PlanMedidaSerializer, ReporteMedidaSerializer, UserSerializer
 
 
 @pytest.mark.django_db
