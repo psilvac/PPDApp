@@ -18,7 +18,7 @@ def crear_roles(apps, schema_editor):
                    "view_medida",
                    "view_planmedida",
                    "change_reportemedida","add_reportemedida", "view_reportemedida"],
-        "Lector": ["view_plan","view_medida", "view_reportemedida"],
+        "Lector": ["view_plan","view_medida", "view_planmedida", "view_reportemedida"],
     }
 
     for role, permisos in roles.items():
@@ -35,7 +35,9 @@ def eliminar_roles(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("user", "0001_initial"),
+        ('user', '0001_initial'),
+        ('auth', '0012_alter_user_first_name_max_length'),
+        ('sessions', '0001_initial'),
     ]
 
     if settings.TESTING == True:
