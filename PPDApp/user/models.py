@@ -107,7 +107,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         # <<< agregado: encripta la contraseña si no está encriptada
-        if self.pk is None or not self.password.startswith('pbkdf2_sha256') and not self.is_superuser:
+        if self.pk is None or not self.password.startswith('pbkdf2_sha256') #and not self.is_superuser:
             self.set_password(self.password)
         super().save(*args, **kwargs)
 
