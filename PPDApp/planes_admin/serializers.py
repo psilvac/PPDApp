@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import *
+from .models import Comuna, Plan, Medida, Organismo, PlanMedida, PlanComuna, ReporteMedida
 
 class MedidaSerializer(serializers.ModelSerializer):
     class Meta:

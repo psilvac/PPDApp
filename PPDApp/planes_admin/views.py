@@ -7,8 +7,6 @@ from .permissions import DjangoModelPermissionsWithRead, EsMismoOrganismo
 from drf_spectacular.utils import extend_schema
 
 
-from .models import *
-from .forms import *
 from django.http import JsonResponse, Http404
 from rest_framework.decorators import api_view
 from drf_spectacular.utils import extend_schema, extend_schema_view
@@ -27,8 +25,8 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import *
-from .serializers import *
+
+from planes_admin.serializers import ComunaSerializer, PlanSerializer, MedidaSerializer, OrganismoSerializer, PlanMedidaSerializer, ReporteMedidaSerializer, UserSerializer
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView

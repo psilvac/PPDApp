@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from planes_admin.models import *
+from planes_admin.models import Plan, Organismo, Medida, Comuna, PlanMedida, PlanComuna, ReporteMedida
 from user.models import Usuario
 from django.contrib.auth.models import Group, Permission
 
