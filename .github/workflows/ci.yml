@@ -63,7 +63,13 @@ jobs:
           python manage.py migrate --fake auth
           python manage.py migrate
 
+      - name: Ver ubicación actual
+        run: |
+          pwd
+          ls -la
+      
       - name: Ejecutar tests
         run: |
+          cd ..
           export DJANGO_SETTINGS_MODULE=settings_test
           pytest
