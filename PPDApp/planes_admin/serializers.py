@@ -36,19 +36,7 @@ class ReporteMedidaSerializer(serializers.ModelSerializer):
             "created_by": {"read_only": True},
             "updated_by": {"read_only": True},  # No requerirlos en el input del request
         }
-    def create(self, validated_data):
-        request = self.context.get("request")  # Obtener el usuario desde el contexto
-        if request and request.user:
-            validated_data["created_by"] = request.user
-            validated_data["updated_by"] = request.user
-        return super().create(validated_data)
 
-    def update(self, instance, validated_data):
-        request = self.context.get("request")
-        print("Usuario Update: ",request.user.email)
-        if request and request.user.email:
-            validated_data["updated_by"] = request.user.email
-        return super().update(instance, validated_data)
 
 
 class PlanSerializer(serializers.ModelSerializer):
