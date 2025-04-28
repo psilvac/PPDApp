@@ -65,5 +65,5 @@ jobs:
 
       - name: Ejecutar tests
         run: |
-          export DJANGO_SETTINGS_MODULE=PPDApp.settings_test
+          export DJANGO_SETTINGS_MODULE=settings_test
           pytest
