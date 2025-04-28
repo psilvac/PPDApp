@@ -21,5 +21,16 @@ if not User.objects.filter(email='admin@example.com').exists():
     )
 " | python3 manage.py shell
 
+echo "
+from django.contrib.auth import get_user_model;
+User = get_user_model();
+if not User.objects.filter(email='admin@admin.com').exists():
+    User.objects.create_superuser(
+        email='admin@admin.com',
+        password='admin123admin',
+        nombre='Pablo',
+        apellido='Silva'
+    )
+" | python3 manage.py shell
 
 python3 manage.py collectstatic && gunicorn --workers 2 PPDApp.wsgi
