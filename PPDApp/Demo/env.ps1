@@ -1,0 +1,5 @@
+$env:DB_NAME="proyectoLimpio"
+$env:DB_USER="postgres"
+$env:DB_PASSWORD="1234"
+$env:DB_HOST="localhost"
+$env:DB_PORT="5432"

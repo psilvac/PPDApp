@@ -17,6 +17,11 @@ class PlanSerializer(serializers.ModelSerializer):
         model = Plan
         fields = '__all__'
 
+        extra_kwargs = {
+            "created_by": {"read_only": True},
+            "updated_by": {"read_only": True},  # No requerirlos en el input del request
+        }
+
     def validate_nombre(self, value):
         if len(value) > 100:
             raise serializers.ValidationError("nombre")
@@ -25,6 +30,21 @@ class PlanSerializer(serializers.ModelSerializer):
         if len(value) > 50:
             raise serializers.ValidationError("resolucion")
         return value
+
+    def create(self, validated_data):
+        request = self.context.get("request")  # Obtener el usuario desde el contexto
+        if request and request.user:
+            validated_data["created_by"] = request.user
+            validated_data["updated_by"] = request.user
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        request = self.context.get("request")
+        print("Usuario Update: ",request.user.email)
+        if request and request.user.email:
+            validated_data["updated_by"] = request.user.email
+        return super().update(instance, validated_data)
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

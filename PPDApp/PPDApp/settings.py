@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import sys
 from pathlib import Path
-from decouple import config
 import os
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,6 @@ SECRET_KEY = 'django-insecure-h6c9t%esptm)cgs3#6c=6b_#rnu^@-51csq=x+d12gauw_b22^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#Prueba
 DEBUG = True
 
 ALLOWED_HOSTS = ["*",]
@@ -57,6 +57,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'PPDApp.urls'
@@ -139,7 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR/"staticfiles"
 
 STORAGES = {
     "default": {
@@ -177,6 +181,8 @@ SPECTACULAR_SETTINGS = {
 
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'email',  # O 'email' si usas autenticación por correo
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),  # El token de acceso durará 2 horas
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # El token de refresco durará 7 días
 }
 
 TESTING = any("pytest" in palabra for palabra in sys.argv)
