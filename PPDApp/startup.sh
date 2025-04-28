@@ -65,44 +65,16 @@ if not User.objects.filter(email='administrador@administrador.com').exists():
 echo "
 from django.contrib.auth import get_user_model;
 User = get_user_model();
-if not User.objects.filter(email='administrador@ppdapp.com').exists():
-    User.objects.create_superuser(
-        email='administrador@ppdapp.com',
-        password='pbkdf2_sha256',
-        nombre='Jorge',
-        apellido='Sanmartin'
-    )
-" | python3 manage.py shell
-
-
-echo "
-from django.contrib.auth import get_user_model;
-User = get_user_model();
-if not User.objects.filter(email='administrador@g4.com').exists():
-    User.objects.create_superuser(
-        email='administrador@g4.com',
+if not User.objects.filter(email='g4admin@admin.com').exists():
+    usuario = User.objects.create_superuser(
+        email='g4admin@admin.com',
         password='12345678',
         nombre='Jorge',
         apellido='Sanmartin'
     )
-" | python3 manage.py shell
-
-
-echo "
-from django.contrib.auth import get_user_model;
-from django.contrib.auth.hashers import make_password;
-User = get_user_model();
-if not User.objects.filter(email='g4@g4.com').exists():
-    User.objects.create(
-        email='g4@g4.com',
-        password=make_password('12345678'),
-        nombre='Jorge',
-        apellido='Sanmartin',
-        is_superuser=True,
-        is_staff=True,
-        is_active=True
-    )
-" | python3 manage.py shell
+	usuario.set_password("12345678")
+	usuario.save()
+" | python3 manage.py shell
 
 
 python3 manage.py collectstatic && gunicorn --workers 2 PPDApp.wsgi
