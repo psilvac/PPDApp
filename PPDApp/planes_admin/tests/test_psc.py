@@ -1,6 +1,6 @@
 import pytest
 from rest_framework.test import APIClient
-from yourapp.models import Usuario  # O como se llame tu modelo de usuario
+from user.models import Usuario  # O como se llame tu modelo de usuario
 
 
 @pytest.mark.django_db
