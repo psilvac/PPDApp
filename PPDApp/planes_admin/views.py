@@ -27,7 +27,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from planes_admin.serializers import ComunaSerializer, PlanSerializer, MedidaSerializer, OrganismoSerializer, PlanMedidaSerializer, ReporteMedidaSerializer, UserSerializer
-
+from planes_admin.views import Plan, Organismo, Medida, Comuna, PlanMedida, PlanComuna,ReporteMedida
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
