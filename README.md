@@ -26,30 +26,41 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
 - git bash 2.44.0
 - Dependencias: requerimientos se encuentran en requirements.txt. Este proyecto requiere las siguientes librerías de Python:
   ```bash
-   asgiref==3.8.1
-   attrs==25.3.0
-   Django==5.1.5
-   djangorestframework==3.15.2
-   djangorestframework_simplejwt==5.5.0
-   drf-spectacular==0.28.0
-   inflection==0.5.1
-   jsonschema==4.23.0
-   jsonschema-specifications==2024.10.1
-   psycopg2==2.9.10
-   PyJWT==2.9.0
-   python-decouple==3.8
-   PyYAML==6.0.2
-   referencing==0.36.2
-   rpds-py==0.24.0
-   sqlparse==0.5.3
-   typing_extensions==4.13.1
-   uritemplate==4.1.1
+	asgiref==3.8.1
+	attrs==25.3.0
+	colorama==0.4.6
+	Django==5.1.5
+	djangorestframework==3.15.2
+	djangorestframework_simplejwt==5.5.0
+	drf-spectacular==0.28.0
+	gunicorn==20.1.0
+	inflection==0.5.1
+	iniconfig==2.1.0
+	jsonschema==4.23.0
+	jsonschema-specifications==2024.10.1
+	packaging==25.0
+	pluggy==1.5.0
+	psycopg2-binary==2.9.10
+	PyJWT==2.9.0
+	pytest==8.3.5
+	pytest-django==4.11.1
+	python-decouple==3.8
+	PyYAML==6.0.2
+	referencing==0.36.2
+	rpds-py==0.24.0
+	setuptools==79.0.1
+	sqlparse==0.5.3
+	typing_extensions==4.13.1
+	tzdata==2025.2
+	uritemplate==4.1.1
+	whitenoise==6.4.0
+
   ```
 
 ### Instalación
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/rodrigo-coco-espinoza/ProyectoFinal-TF.git
+   git clone https://github.com/psilvac/PPDApp/ProyectoFinal-TF.git
    cd ProyectoFinal-TF
    
 2. Crear y activar entorno virtual
@@ -57,21 +68,22 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
    python -m venv venv
    venv\Scripts\activate         # En Windows
    
-3. Instalar dependencias
-   ```bash
-   pip install -r requirements.txt
-
-4. Navegar a carpeta PPDApp
+3. Navegar a carpeta PPDApp
    ```bash
    cd  PPDApp
 
-5. Crear una base de datos Postgres y crear un archivo .env con los datos de conexion a la nueva base de datos
+4. Instalar dependencias
+   ```bash
+   pip install -r requirements.txt
+
+5. Crear una base de datos Postgres y editar archivo env.ps1 con los datos de conexion a la nueva base de datos
   ```bash
-  DB_NAME=[Nombre BD creada]
-  DB_USER=[Usuario, generalmente postgres]
-  DB_PASSWORD=[password usuario postgres]
-  DB_HOST=[IP base de datos postgres, puede sel localhost]
-  DB_PORT=[puerto base de datos postgres, usualmete 5432]
+  
+  $env:DB_NAME=[Nombre BD creada]
+  $env:DB_USER=[Usuario, generalmente postgres]
+  $env:DB_PASSWORD=[password usuario postgres]
+  $env:DB_HOST=[IP base de datos postgres, puede sel localhost]
+  $env:DB_PORT=[puerto base de datos postgres, usualmete 5432]
 
 6. Migrar la base de datos
    ```bash
@@ -83,8 +95,6 @@ Si falla el ultimo paso, ejecutar:
    ```bash
    python manage.py migrate --fake auth  
    python manage.py migrate
-
-7- (Opcional) Para reliazar la demo, hacer un restore en la base de datos para cargar los usuarios de prueba con sus permisos listos para probar la aplicacion. Hay que usar el archivo Demo/dump-usuarios.sql, luego ejecutar el script Demo/changepw.ps1 para resetear las password de los usuarios y guardar las nuevas passwords para su uso posterior
 
 8. Ejecutar el servidor
    ```bash
@@ -166,5 +176,4 @@ Las siguientes etapas del proyecto consideran:
 - Generación de reportes descargables y visualizaciones gráficas.
 - Validación de reportes con estado y comentarios.
 - Mejora de la interfaz de usuario y documentación completa en Swagger.
-
 
