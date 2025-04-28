@@ -71,8 +71,6 @@ jobs:
       
       - name: Ejecutar tests
         run: |
-          ls
           cd PPDApp
-          ls
-          pytest planes_admin/tests/test_psc.py
+          pytest planes_admin/tests/
           
