@@ -65,4 +65,4 @@ jobs:
 
       - name: Ejecutar tests
         run: |
-          pytest planes_admin/tests/test_psc.py
+          pytest
