@@ -49,7 +49,7 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
 ### Instalación
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/rodrigo-coco-espinoza/ProyectoFinal-TF.git
+   git clone https://github.com/psilvac/PPDApp/ProyectoFinal-TF.git
    cd ProyectoFinal-TF
    
 2. Crear y activar entorno virtual
@@ -57,21 +57,22 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
    python -m venv venv
    venv\Scripts\activate         # En Windows
    
-3. Instalar dependencias
-   ```bash
-   pip install -r requirements.txt
-
-4. Navegar a carpeta PPDApp
+3. Navegar a carpeta PPDApp
    ```bash
    cd  PPDApp
 
-5. Crear una base de datos Postgres y crear un archivo .env con los datos de conexion a la nueva base de datos
+4. Instalar dependencias
+   ```bash
+   pip install -r requirements.txt
+
+5. Crear una base de datos Postgres y editar archivo env.ps1 con los datos de conexion a la nueva base de datos
   ```bash
-  DB_NAME=[Nombre BD creada]
-  DB_USER=[Usuario, generalmente postgres]
-  DB_PASSWORD=[password usuario postgres]
-  DB_HOST=[IP base de datos postgres, puede sel localhost]
-  DB_PORT=[puerto base de datos postgres, usualmete 5432]
+  
+  $env:DB_NAME=[Nombre BD creada]
+  $env:DB_USER=[Usuario, generalmente postgres]
+  $env:DB_PASSWORD=[password usuario postgres]
+  $env:DB_HOST=[IP base de datos postgres, puede sel localhost]
+  $env:DB_PORT=[puerto base de datos postgres, usualmete 5432]
 
 6. Migrar la base de datos
    ```bash
@@ -83,8 +84,6 @@ Si falla el ultimo paso, ejecutar:
    ```bash
    python manage.py migrate --fake auth  
    python manage.py migrate
-
-7- (Opcional) Para reliazar la demo, hacer un restore en la base de datos para cargar los usuarios de prueba con sus permisos listos para probar la aplicacion. Hay que usar el archivo Demo/dump-usuarios.sql, luego ejecutar el script Demo/changepw.ps1 para resetear las password de los usuarios y guardar las nuevas passwords para su uso posterior
 
 8. Ejecutar el servidor
    ```bash
@@ -166,5 +165,4 @@ Las siguientes etapas del proyecto consideran:
 - Generación de reportes descargables y visualizaciones gráficas.
 - Validación de reportes con estado y comentarios.
 - Mejora de la interfaz de usuario y documentación completa en Swagger.
-
 
