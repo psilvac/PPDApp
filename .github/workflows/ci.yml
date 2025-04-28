@@ -62,6 +62,7 @@ jobs:
           python manage.py migrate --settings=PPDApp.settings_test || true
           python manage.py migrate --fake auth --settings=PPDApp.settings_test
           python manage.py migrate --settings=PPDApp.settings_test
+          python manage.py migrate --fake auth --settings=PPDApp.settings_test
 
       - name: Ver ubicación actual
         run: |
@@ -74,3 +75,4 @@ jobs:
           cd PPDApp
           ls
           pytest planes_admin/tests/test_psc.py
+          
