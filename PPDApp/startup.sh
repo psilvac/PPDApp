@@ -65,15 +65,15 @@ if not User.objects.filter(email='administrador@administrador.com').exists():
 echo "
 from django.contrib.auth import get_user_model;
 User = get_user_model();
-if not User.objects.filter(email='g4admin@admin.com').exists():
+if not User.objects.filter(email='administrador1@g4.com').exists():
     usuario = User.objects.create_superuser(
-        email='g4admin@admin.com',
+        email='administrador1@g4.com',
         password='12345678',
         nombre='Jorge',
         apellido='Sanmartin'
     )
-	usuario.set_password("12345678")
-	usuario.save()
+    usuario.set_password("12345678")
+    usuario.save()
 " | python3 manage.py shell
 
 
