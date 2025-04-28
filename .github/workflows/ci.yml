@@ -53,8 +53,8 @@ jobs:
       - name: Esperar que Postgres esté listo
         run: |
           cd PPDApp
-          echo "Esperando 15 segundos a que Postgres esté saludable..."
-          sleep 15
+          echo "Esperando 5 segundos a que Postgres esté saludable..."
+          sleep 5
 
       - name: Migrar base de datos
         run: |
@@ -73,5 +73,6 @@ jobs:
           pwd
           ls -la
           cd PPDApp
-          export DJANGO_SETTINGS_MODULE=settings_test
-          pytest planes_admin/test/test_psc.py
+          cd planes_admin
+          cd test
+          pytest 
