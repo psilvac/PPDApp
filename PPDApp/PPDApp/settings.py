@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import sys
 from pathlib import Path
-from decouple import config
 import os
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -180,6 +181,8 @@ SPECTACULAR_SETTINGS = {
 
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'email',  # O 'email' si usas autenticación por correo
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),  # El token de acceso durará 2 horas
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # El token de refresco durará 7 días
 }
 
 TESTING = any("pytest" in palabra for palabra in sys.argv)
