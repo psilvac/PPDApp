@@ -59,9 +59,9 @@ jobs:
       - name: Migrar base de datos
         run: |
           cd PPDApp
-          python manage.py migrate --noinput || true
-          python manage.py migrate --fake auth
-          python manage.py migrate
+          python manage.py migrate --settings=PPDApp.settings_test || true
+          python manage.py migrate --fake auth --settings=PPDApp.settings_test
+          python manage.py migrate --settings=PPDApp.settings_test
 
       - name: Ver ubicación actual
         run: |
