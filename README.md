@@ -76,8 +76,7 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
    ```bash
    pip install -r requirements.txt
 
-5. Crear una base de datos Postgres, editar y ejecutar el archivo en powershell Demo\env.ps1 con los datos de conexion a la nueva base de datos. Todas las variables deben estar como string, esto es, con comillas. 
-Nota: en el caso de que no se ejecute el archivo, copiar y pegar en la terminal de powershell.
+5. Crear una base de datos Postgres, editar y ejecutar el archivo en powershell Demo\env.ps1 con los datos de conexion a la nueva base de datos. Todas las variables deben estar como string, esto es, con comillas. Nota: en el caso de que no se ejecute el archivo, copiar y pegar en la terminal de powershell.-
   ```bash
   
   $env:DB_NAME=[Nombre BD creada, como string] 
