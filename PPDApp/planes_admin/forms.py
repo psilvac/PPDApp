@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import Comuna, Plan, Medida, Organismo, PlanMedida, PlanComuna, ReporteMedida
 
 class agregar_plan_form(forms.ModelForm):
     class Meta:

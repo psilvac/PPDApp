@@ -76,7 +76,7 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
    ```bash
    pip install -r requirements.txt
 
-5. Crear una base de datos Postgres y editar archivo env.ps1 con los datos de conexion a la nueva base de datos
+5. Crear una base de datos Postgres y editar archivo Demo/env.ps1 con los datos de conexion a la nueva base de datos
   ```bash
   
   $env:DB_NAME=[Nombre BD creada]
