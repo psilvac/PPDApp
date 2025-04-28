@@ -154,7 +154,12 @@ class PlanComuna(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
     comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
     organismo = models.ForeignKey(Organismo, on_delete=models.CASCADE, help_text='Organismo sectorial responsable de reportar la medida')
-    
+    # Campos de auditor
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.plan.nombre + " - " + self.comuna.nombre
 
@@ -175,6 +180,11 @@ class ReporteMedida(models.Model):
     medio_verificacion = models.CharField(max_length=200, blank=True, null=True) #models.FileField(upload_to='reportes/')
     #estado = models.CharField(max_length=50, choices=["validado", "no validado"], default="no validado")
     observaciones = models.CharField(max_length=200, blank=True, null=True)
+    # Campos de auditor
+    created_by = models.EmailField()
+    updated_by = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.medida.medida.nombre + "-" + str(self.fecha)
