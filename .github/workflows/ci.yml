@@ -75,3 +75,4 @@ jobs:
           cd PPDApp
           ls
           pytest planes_admin/tests/test_psc.py
+          
