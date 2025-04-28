@@ -26,24 +26,35 @@ La plataforma facilitará la recopilación y monitoreo de los avances en las med
 - git bash 2.44.0
 - Dependencias: requerimientos se encuentran en requirements.txt. Este proyecto requiere las siguientes librerías de Python:
   ```bash
-   asgiref==3.8.1
-   attrs==25.3.0
-   Django==5.1.5
-   djangorestframework==3.15.2
-   djangorestframework_simplejwt==5.5.0
-   drf-spectacular==0.28.0
-   inflection==0.5.1
-   jsonschema==4.23.0
-   jsonschema-specifications==2024.10.1
-   psycopg2==2.9.10
-   PyJWT==2.9.0
-   python-decouple==3.8
-   PyYAML==6.0.2
-   referencing==0.36.2
-   rpds-py==0.24.0
-   sqlparse==0.5.3
-   typing_extensions==4.13.1
-   uritemplate==4.1.1
+	asgiref==3.8.1
+	attrs==25.3.0
+	colorama==0.4.6
+	Django==5.1.5
+	djangorestframework==3.15.2
+	djangorestframework_simplejwt==5.5.0
+	drf-spectacular==0.28.0
+	gunicorn==20.1.0
+	inflection==0.5.1
+	iniconfig==2.1.0
+	jsonschema==4.23.0
+	jsonschema-specifications==2024.10.1
+	packaging==25.0
+	pluggy==1.5.0
+	psycopg2-binary==2.9.10
+	PyJWT==2.9.0
+	pytest==8.3.5
+	pytest-django==4.11.1
+	python-decouple==3.8
+	PyYAML==6.0.2
+	referencing==0.36.2
+	rpds-py==0.24.0
+	setuptools==79.0.1
+	sqlparse==0.5.3
+	typing_extensions==4.13.1
+	tzdata==2025.2
+	uritemplate==4.1.1
+	whitenoise==6.4.0
+
   ```
 
 ### Instalación
