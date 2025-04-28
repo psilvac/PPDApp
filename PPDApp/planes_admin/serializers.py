@@ -61,15 +61,6 @@ class PlanSerializer(serializers.ModelSerializer):
             "updated_by": {"read_only": True},  # No requerirlos en el input del request
         }
 
-    def validate_nombre(self, value):
-        if len(value) > 100:
-            raise serializers.ValidationError("nombre")
-        return value
-    def validate_resolucion(self, value):
-        if len(value) > 50:
-            raise serializers.ValidationError("resolucion")
-        return value
-
     def create(self, validated_data):
         request = self.context.get("request")  # Obtener el usuario desde el contexto
         if request and request.user:
@@ -84,6 +75,14 @@ class PlanSerializer(serializers.ModelSerializer):
             validated_data["updated_by"] = request.user.email
         return super().update(instance, validated_data)
 
+    def validate_nombre(self, value):
+        if len(value) > 100:
+            raise serializers.ValidationError("nombre")
+        return value
+    def validate_resolucion(self, value):
+        if len(value) > 50:
+            raise serializers.ValidationError("resolucion")
+        return value
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
