@@ -5,9 +5,8 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('planes_admin', '0002_planmedida_organismo_and_more'),
+        ('planes_admin', '0001_initial'),
     ]
 
     operations = [
