@@ -53,17 +53,24 @@ jobs:
       - name: Esperar que Postgres esté listo
         run: |
           cd PPDApp
-          echo "Esperando 15 segundos a que Postgres esté saludable..."
-          sleep 15
+          echo "Esperando 5 segundos a que Postgres esté saludable..."
+          sleep 5
 
       - name: Migrar base de datos
         run: |
           cd PPDApp
-          python manage.py migrate --noinput || true
-          python manage.py migrate --fake auth
-          python manage.py migrate
+          python manage.py migrate --settings=PPDApp.settings_test || true
+          python manage.py migrate --fake auth --settings=PPDApp.settings_test
+          python manage.py migrate --settings=PPDApp.settings_test
 
+      - name: Ver ubicación actual
+        run: |
+          pwd
+          ls -la
+      
       - name: Ejecutar tests
         run: |
+          ls
           cd PPDApp
+          ls
           pytest planes_admin/tests/test_psc.py
