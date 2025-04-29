@@ -8,7 +8,6 @@ python3 manage.py showmigrations || echo "❌ Error de conexión a la base de da
 python3 manage.py migrate --fake auth
 python3 manage.py migrate
 
-
 echo "
 from django.contrib.auth import get_user_model;
 User = get_user_model();
